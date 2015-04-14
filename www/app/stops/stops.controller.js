@@ -4,11 +4,10 @@
   angular.module('transitbus')
     .controller('StopsController', StopsController);
 
-  function StopsController(Stops, directionModal, pdfStore, Favorites, routeMap) {
+  function StopsController($scope, Stops, directionModal, pdfStore, Favorites, routeMap) {
 
     var vm = this;
     vm.previewPdf = pdfStore.preview;
-    vm.stops = Stops.findAll();
     vm.openDirectionModal = directionModal.open;
     vm.toggleFavorite = toggleFavorite;
     vm.stopFilter = stopFilter;
@@ -49,6 +48,11 @@
         return stop
       }
     }
+    ////////////
+
+    $scope.$on('$ionicView.enter', function() {
+      vm.stops = Stops.findAll();
+    });
 
   }
 

@@ -6,7 +6,7 @@
 
   function Stops($q, lodash, Seeds, Favorites) {
 
-    var stops = mixFavorites(angular.copy(Seeds.stops));
+    var stops = angular.copy(Seeds.stops);
 
     // Public API here
     var service = {
@@ -19,7 +19,7 @@
 
     ////////////
     function findAll() {
-      return stops;
+      return mixFavorites(stops);
     }
 
     function findById(id) {
@@ -31,20 +31,22 @@
     }
 
     function mixFavorites(hiraganas) {
-      angular.forEach(Favorites.getCurrent(), function(favorite) {
-        var matchedStop;
-        angular.forEach(hiraganas, function(hiragana) {
-          if (this.keepGoing) {
-            matchedStop = lodash.find(hiragana.stops, {
-              name: favorite.name
-            });
-            if (matchedStop) {
-              matchedStop.favorite = true;
-              this.keepGoing = false;
+      var currentFavorites = Favorites.getCurrent();
+      angular.forEach(hiraganas, function(hiragana) {
+        angular.forEach(hiragana.stops, function(stop) {
+          // favoriteを一旦削除
+          stop.favorite = false;
+          // favoriteがあれば設定する
+          angular.forEach(currentFavorites, function(favorite) {
+            if (this.keepGoing) {
+              if (stop.name === favorite.name) {
+                stop.favorite = true;
+                this.keepGoing = false;
+              }
             }
-          }
-        }, {
-          keepGoing: true
+          }, {
+            keepGoing: true
+          });
         });
       });
       return hiraganas;
@@ -52,7 +54,7 @@
 
     function clear() {
       return $q(function(resolve, reject) {
-        stops = mixFavorites(angular.copy(Seeds.stops));
+        stops = angular.copy(Seeds.stops);
         resolve();
       });
     }

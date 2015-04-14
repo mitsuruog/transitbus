@@ -38,7 +38,9 @@
     }
 
     function toggle(stop) {
-      var matchedStop = lodash.find(favorites, {name: stop.name});
+      var matchedStop = lodash.find(favorites, {
+        name: stop.name
+      });
       var index = favorites.indexOf(matchedStop);
       return $q(function(resolve, reject) {
         if (matchedStop) {
