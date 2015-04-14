@@ -4,7 +4,7 @@
   angular.module('transitbus.services')
     .factory('pdfStore', pdfStore);
 
-  function pdfStore($q, $timeout, $ionicLoading, $cordovaFile, $cordovaFileTransfer, $cordovaFileOpener2, $cordovaFileError) {
+  function pdfStore($q, $timeout, $ionicLoading, $cordovaFile, $cordovaFileTransfer, $cordovaFileOpener2, $cordovaFileError, $exceptionHandler) {
 
     // Public API here
     var service = {
@@ -40,7 +40,14 @@
           return open(file.nativeURL);
         })
         .catch(function(err) {
-          console.log(err);
+          // ネットワーク切断の場合
+          if($cordovaFileError[err.code] === 'ABORT_ERR') {
+            $exceptionHandler({
+              exception: 'インターネットに接続できません。'
+            }, 'pdfStore');
+          }else {
+            throw err;
+          }
         })
         .finally(function() {
           $ionicLoading.hide();
@@ -103,7 +110,7 @@
           deferred.resolve();
         }, function(err) {
           // フォルダが存在しない場合
-          if(err.message === 'NOT_FOUND_ERR') {
+          if($cordovaFileError[err.code] === 'NOT_FOUND_ERR') {
             deferred.resolve();
           }
           deferred.reject(err);
