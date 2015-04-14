@@ -1,0 +1,27 @@
+<ion-view view-title="バス停検索">
+  <ion-nav-buttons side="secondary">
+    <button class="button icon-left ion-merge" ng-click="vm.openRouteMap()">
+      路線図
+    </button>
+  </ion-nav-buttons>
+  <div class="bar bar-subheader item-input-inset">
+    <label class="item-input-wrapper">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input type="search" placeholder="例）みょうでん" ng-model="vm.query" ng-model-options="{debounce: 500}">
+    </label>
+  </div>
+  <ion-content class="has-subheader">
+    <div class="list animated" ng-repeat="hiragana in vm.stops | filter: vm.filterHiragana" ng-if="hiragana.stops.length">
+      <div class="item item-divider">
+        {{hiragana.name}}
+      </div>
+      <a class="item item-icon-left list-stop" ng-repeat="stop in hiragana.stops | filter: vm.stopFilter">
+        <i class="icon balanced icon-favorite animated" ng-class="{
+          'ion-ios-star-outline': !stop.favorite,
+          'ion-ios-star': stop.favorite
+        }" ng-click="vm.toggleFavorite(stop)"></i>
+        <span class="row" ng-click="vm.openDirectionModal(stop)">{{stop.name}}</span>
+      </a>
+    </div>
+  </ion-content>
+</ion-view>

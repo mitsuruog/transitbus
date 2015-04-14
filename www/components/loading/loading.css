@@ -1,0 +1,7 @@
+.loading {
+  background-color: #616161 !important;
+}
+.spinner.light svg {
+  stroke: #fff !important;
+  fill: #fff !important;
+}

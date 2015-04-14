@@ -1,0 +1,18 @@
+<ion-view view-title="お気に入り">
+  <ion-nav-buttons side="secondary">
+    <button class="button icon-left ion-merge" ng-click="vm.openRouteMap()">
+      路線図
+    </button>
+  </ion-nav-buttons>
+  <ion-content>
+    <ion-list can-swipe="true">
+      <ion-item class="item-favorite item-icon-left animated" ng-repeat="favorite in vm.favorites" ng-click="vm.openDirectionModal(favorite)">
+        <i class="icon ion-ios-star balanced"></i>
+        {{favorite.name}}
+        <ion-option-button class="button-dark" on-tap="vm.toggleFavorite(favorite)">
+          <i class="icon ion-ios-trash-outline"></i>
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

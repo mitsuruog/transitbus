@@ -1,0 +1,6 @@
+.item-favorite.ng-leave {
+  -webkit-animation-duration: .3s;
+  animation-duration: .3s;
+  -webkit-animation-name: slideOutLeft;
+  animation-name: slideOutLeft;
+}
