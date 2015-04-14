@@ -46,11 +46,11 @@
         if (matchedStop) {
           stop.favorite = false;
           favorites.splice(index, 1);
-          $cordovaToast.showLongBottom(MESSASES.remove, 'short');
+          $cordovaToast.showShortBottom(MESSASES.remove);
         } else {
           stop.favorite = true;
           favorites.push(stop);
-          $cordovaToast.showLongBottom(MESSASES.add, 'short');
+          $cordovaToast.showShortBottom(MESSASES.add);
         }
         $localStorage.favorites = favorites;
         resolve();
