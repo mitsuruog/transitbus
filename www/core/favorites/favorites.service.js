@@ -4,7 +4,7 @@
   angular.module('transitbus.services')
     .factory('Favorites', Favorites);
 
-  function Favorites($q, lodash, $cordovaToast, $localStorage) {
+  function Favorites($q, lodash, $cordovaToast, $localStorage, analytics) {
 
     var favorites = [];
 
@@ -47,10 +47,12 @@
           stop.favorite = false;
           favorites.splice(index, 1);
           $cordovaToast.showShortBottom(MESSASES.remove);
+          analytics.trackRemoveFavoriteEvent(stop);
         } else {
           stop.favorite = true;
           favorites.push(stop);
           $cordovaToast.showShortBottom(MESSASES.add);
+          analytics.trackAddFavoriteEvent(stop);
         }
         $localStorage.favorites = favorites;
         resolve();

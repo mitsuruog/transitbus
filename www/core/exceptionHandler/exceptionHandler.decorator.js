@@ -8,6 +8,7 @@
     $provide.decorator("$exceptionHandler", function($delegate, $injector) {
       return function (exception, cause) {
         var $cordovaToast = $injector.get('$cordovaToast');
+        var analytics = $injector.get('analytics');
         if ($cordovaToast.showLongBottom) {
           var message = exception.exception;
           if(!cause) {
@@ -15,10 +16,10 @@
             // TODO ここでアナリティクスへ通知
           }
           $cordovaToast.showShortBottom(message);
-        } else {
-          // (Optional) Pass the error through to the delegate
-          $delegate(exception, cause);
         }
+        // (Optional) Pass the error through to the delegate
+        analytics.trackException(exception.exception);
+        $delegate(exception, cause);
       }
     });
   }

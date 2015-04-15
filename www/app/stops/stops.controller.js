@@ -4,7 +4,7 @@
   angular.module('transitbus')
     .controller('StopsController', StopsController);
 
-  function StopsController($scope, Stops, directionModal, pdfStore, Favorites, routeMap) {
+  function StopsController($scope, Stops, directionModal, pdfStore, Favorites, routeMap, analytics) {
 
     var vm = this;
     vm.previewPdf = pdfStore.preview;
@@ -52,6 +52,10 @@
 
     $scope.$on('$ionicView.enter', function() {
       vm.stops = Stops.findAll();
+    });
+
+    $scope.$on('$ionicView.beforeEnter', function() {
+      analytics.trackView('stops');
     });
 
   }

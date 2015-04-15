@@ -4,7 +4,7 @@
   angular.module('transitbus')
     .controller('FavoriteController', FavoriteController);
 
-  function FavoriteController(Favorites, routeMap, directionModal) {
+  function FavoriteController($scope, Favorites, routeMap, directionModal, analytics) {
 
     var vm = this;
     vm.favorites = Favorites.getCurrent();
@@ -13,6 +13,10 @@
     vm.openRouteMap = routeMap.open;
 
     ////////////
+
+    $scope.$on('$ionicView.beforeEnter', function() {
+      analytics.trackView('favorites');
+    });
 
   }
 

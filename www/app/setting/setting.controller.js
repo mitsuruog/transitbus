@@ -4,7 +4,7 @@
   angular.module('transitbus')
     .controller('SettingController', SettingController);
 
-  function SettingController($q, $cordovaDialogs, $cordovaToast, Favorites, Stops, pdfStore) {
+  function SettingController($scope, $q, $cordovaDialogs, $cordovaToast, Favorites, Stops, pdfStore, analytics) {
 
     var MESSASES = {
       removeAll: 'データを初期化しました。'
@@ -28,12 +28,18 @@
             .then(function() {
               $cordovaToast.showLongBottom(MESSASES.removeAll);
             })
-            .catch(function(err) {
-              console.log(err);
+            .finally(function() {
+              analytics.trackEvent('button', 'allClear', '', 1);
             });
           }
         });
     }
+
+    ////////////
+
+    $scope.$on('$ionicView.beforeEnter', function() {
+      analytics.trackView('settings');
+    });
 
   }
 

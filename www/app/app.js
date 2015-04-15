@@ -15,7 +15,7 @@ angular.module('transitbus', [
   'ngCordova'
 ])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, analytics) {
     $ionicPlatform.ready(function() {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -26,6 +26,9 @@ angular.module('transitbus', [
         // org.apache.cordova.statusbar required
         StatusBar.styleLightContent();
       }
+
+      analytics.initialize();
+
     });
   })
   .config(function($ionicConfigProvider) {
@@ -66,24 +69,6 @@ angular.module('transitbus', [
         }
       }
     })
-    // .state('tab.routes', {
-    //   url: '/routes',
-    //   views: {
-    //     'tab-routes': {
-    //       templateUrl: 'app/routes/routes.html',
-    //       controller: 'RoutesController as vm'
-    //     }
-    //   }
-    // })
-    // .state('tab.route', {
-    //   url: '/routes/:routeId',
-    //   views: {
-    //     'tab-routes': {
-    //       templateUrl: 'app/route/route.html',
-    //       controller: 'RouteController as vm'
-    //     }
-    //   }
-    // })
     .state('tab.settings', {
       url: '/settings',
       views: {

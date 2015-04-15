@@ -7,7 +7,7 @@
   </ion-header-bar>
   <ion-content>
     <ion-list>
-      <ion-item class="item-icon-left" collection-repeat="timetable in $root.ionicModal.stop.timetables" ng-click="vm.previewPdf(timetable.url)">
+      <ion-item class="item-icon-left" collection-repeat="timetable in $root.ionicModal.stop.timetables" ng-click="vm.previewPdf(timetable)">
         <i class="icon ion-network"></i>
         {{timetable.direction}}
       </ion-item>

@@ -4,7 +4,7 @@
   angular.module('transitbus.components')
     .controller('DirectionModalNameController', DirectionModalNameController);
 
-  function DirectionModalNameController(pdfStore, directionModal) {
+  function DirectionModalNameController($rootScope, pdfStore, directionModal, analytics) {
 
     var vm = this;
     vm.previewPdf = previewPdf;
@@ -12,9 +12,10 @@
 
     ////////////
 
-    function previewPdf(url) {
-      pdfStore.preview(url);
-
+    function previewPdf(timetable) {
+      var label = $rootScope.ionicModal.stop.name + ':' + timetable.direction;
+      analytics.trackShowTimetableEvent(label);
+      pdfStore.preview(timetable.url);
     }
 
   }
