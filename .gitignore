@@ -10,5 +10,6 @@ www/**/*.csv
 www/lib/
 
 seed.js
+app.constant.js
 
 .sass-cache
