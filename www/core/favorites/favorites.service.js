@@ -4,14 +4,9 @@
   angular.module('transitbus.services')
     .factory('Favorites', Favorites);
 
-  function Favorites($q, lodash, $cordovaToast, $localStorage, analytics) {
+  function Favorites(constant, $q, lodash, $cordovaToast, $localStorage, analytics) {
 
     var favorites = [];
-
-    var MESSASES = {
-      add: 'お気に入りに追加しました。',
-      remove: 'お気に入りから削除しました。'
-    };
 
     // Public API here
     var service = {
@@ -46,12 +41,12 @@
         if (matchedStop) {
           stop.favorite = false;
           favorites.splice(index, 1);
-          $cordovaToast.showShortBottom(MESSASES.remove);
+          $cordovaToast.showShortBottom(constant.MESSAGES.removeFavorite);
           analytics.trackRemoveFavoriteEvent(stop);
         } else {
           stop.favorite = true;
           favorites.push(stop);
-          $cordovaToast.showShortBottom(MESSASES.add);
+          $cordovaToast.showShortBottom(constant.MESSAGES.addFavorite);
           analytics.trackAddFavoriteEvent(stop);
         }
         $localStorage.favorites = favorites;

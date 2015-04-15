@@ -4,7 +4,7 @@
   angular.module('transitbus.services')
     .factory('analytics', analytics);
 
-  function analytics() {
+  function analytics(constant) {
 
     var $analytics;
 
@@ -28,7 +28,7 @@
       function waitForAnalytics() {
         if (navigator.analytics) {
           $analytics = navigator.analytics;
-          $analytics.setTrackingId('UA-61873534-2');
+          $analytics.setTrackingId(constant.GA.trackingId);
           trackView('initialize');
         } else {
           setTimeout(function() {

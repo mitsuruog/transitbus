@@ -1,10 +1,10 @@
-(function(){
+(function() {
   'use strict';
 
   angular.module('transitbus.services')
     .factory('routeMap', routeMap);
 
-  function routeMap(pdfStore, analytics) {
+  function routeMap(constant, pdfStore, analytics) {
 
     // Public API here
     var service = {
@@ -14,10 +14,9 @@
     return service;
 
     ////////////
-    function open(){
-      var url = 'http://www.transitbus.co.jp/data/bus/map/map_20140725.pdf';
+    function open() {
       analytics.trackShowRouteMapEvent();
-      pdfStore.preview(url);
+      pdfStore.preview(constant.URL.routeMap);
     }
 
   }

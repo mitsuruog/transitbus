@@ -7,6 +7,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('transitbus', [
   'ionic',
+  'transitbus.constant',
   'transitbus.services',
   'transitbus.components',
   'ngAnimate',
