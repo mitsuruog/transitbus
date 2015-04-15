@@ -5,18 +5,27 @@
       <div class="item item-divider">
         一般
       </div>
-      <a class="item">
+      <div class="item">
         <button class="button ion-android-warning button-block button-dark" ng-click="vm.allClear()">
           データ初期化
         </button>
-      </a>
+      </div>
       <!-- その他 -->
       <div class="item item-divider">
         その他
       </div>
-      <a class="item">
+      <div class="item">
+        <i class="icon ion-alert-circled"></i>
+        免責事項
+        <div class="list list-inset">
+          <div class="item item-text-wrap item-disclaimer">
+            {{vm.disclaimer}}
+          </div>
+        </div>
+      </div>
+      <div class="item">
         バージョン 0.0.1
-      </a>
+      </div>
     </div>
   </ion-content>
 </ion-view>
