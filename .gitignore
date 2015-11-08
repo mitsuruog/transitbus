@@ -13,3 +13,6 @@ seed.js
 app.constant.js
 
 .sass-cache
+
+*.keystore
+*.apk
